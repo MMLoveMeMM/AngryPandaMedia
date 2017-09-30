@@ -17,6 +17,9 @@ import android.os.Build;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.pumpkin.org.angrypandaav.mediac.acc.p1.test.i.DumpFileAudio;
+import com.pumpkin.org.angrypandaav.mediac.acc.p1.test.i.IDumpAudio;
+
 /**
  * Created by rd0348 on 2017/9/30 0030.
  */
@@ -27,7 +30,11 @@ public class AudioEncoderP1 {
     private MediaCodec mediaCodec;
     private String codecName;
 
-    public AudioEncoderP1() {
+    private IDumpAudio dumpAudio;
+
+    public AudioEncoderP1(IDumpAudio dumpAudio) {
+
+        this.dumpAudio = dumpAudio;
         initMediacodec();
     }
 
@@ -39,6 +46,7 @@ public class AudioEncoderP1 {
                 if (TextUtils.equals(type, MINE_TYPE)
                         && mediaCodecInfo.isEncoder()) {
                     codecName = mediaCodecInfo.getName();
+
                     break;
                 }
             }
@@ -83,6 +91,7 @@ public class AudioEncoderP1 {
             byte[] outData = new byte[bufferInfo.size];
             outputBuffer.get(outData);
             //send(outData, bufferInfo.size);
+            dumpAudio.onFrame(outData, outData.length);
             mediaCodec.releaseOutputBuffer(outputBufferIndex, false);
             outputBufferIndex = mediaCodec.dequeueOutputBuffer(bufferInfo, 0);
         }

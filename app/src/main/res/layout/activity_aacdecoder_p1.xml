@@ -4,6 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.pumpkin.org.angrypandaav.mediac.acc.p1.test.t1.AudioEncoderP1Act">
+    tools:context="com.pumpkin.org.angrypandaav.mediac.acc.p1.test.t2.AACDecoderP1Act">
 
 </android.support.constraint.ConstraintLayout>
