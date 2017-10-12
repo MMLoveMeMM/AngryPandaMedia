@@ -14,7 +14,7 @@ import android.media.MediaRecorder;
 
 public class AudioEncoderP1Act extends Activity {
 
-    private DumpPlayerAudio dumpAudio;
+    private DumpFileAudio dumpAudio;
     private AudioEncoderP1Thread audioEncoderP1Thread;
 
     @Override
@@ -22,8 +22,8 @@ public class AudioEncoderP1Act extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_audio_encoder_p1);
 
-        dumpAudio = new DumpPlayerAudio();
-        dumpAudio.startPlayer();
+        dumpAudio = new DumpFileAudio();
+        dumpAudio.createFile();
 
         audioEncoderP1Thread = new AudioEncoderP1Thread(dumpAudio);
         audioEncoderP1Thread.start();
@@ -35,7 +35,7 @@ public class AudioEncoderP1Act extends Activity {
         super.onDestroy();
 
         if (dumpAudio != null) {
-            dumpAudio.stopPlayer();
+            dumpAudio.closeFile();
         }
     }
 }

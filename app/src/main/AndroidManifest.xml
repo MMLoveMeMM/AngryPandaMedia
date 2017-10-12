@@ -59,7 +59,10 @@
         <activity android:name=".mediac.vedio.p1.test.AVCDecoderP1Act" />
         <activity android:name=".mediac.vedio.p3.test.AvcDecoderP3Act" />
         <activity android:name=".mediac.acc.p1.test.t1.AudioEncoderP1Act" />
-        <activity android:name=".mediac.acc.p1.test.t2.AACDecoderP1Act"></activity>
+        <activity android:name=".mediac.acc.p1.test.t2.AudioDecoderP1Act" />
+        <activity android:name=".manager.camera.test.CameraTestActivity" />
+        <activity android:name=".manager.camera.test.CameraGLTestActivity" />
+        <activity android:name=".x264.X264TestActivity"></activity>
     </application>
 
 </manifest>

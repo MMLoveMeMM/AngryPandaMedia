@@ -70,6 +70,7 @@ public class AudioEncoderP1 {
         AudioTag audioTag = AudioSpecificConfig.getTag(
                 CodecProfileLevel.AACObjectLC, 44100, 1);
         //sendAAcTag(audioTag.getData());
+
     }
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)

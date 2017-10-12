@@ -6,14 +6,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.pumpkin.org.angrypandaav.manager.camera.test.CameraGLTestActivity;
+import com.pumpkin.org.angrypandaav.manager.camera.test.CameraTestActivity;
 import com.pumpkin.org.angrypandaav.mediac.acc.p1.test.t1.AudioEncoderP1Act;
 
-public class MainActivity extends Activity implements View.OnClickListener{
 
-    // Used to load the 'native-lib' library on application startup.
-    static {
-        System.loadLibrary("native-lib");
-    }
+public class MainActivity extends Activity implements View.OnClickListener{
 
     private Button mCameraMCBtn;
 
@@ -27,19 +25,13 @@ public class MainActivity extends Activity implements View.OnClickListener{
 
     }
 
-    /**
-     * A native method that is implemented by the 'native-lib' native library,
-     * which is packaged with this application.
-     */
-    public native String stringFromJNI();
-
     @Override
     public void onClick(View v) {
 
         int id=v.getId();
         switch (id) {
             case R.id.camera_mc:
-                startActivity(new Intent(this, AudioEncoderP1Act.class));
+                startActivity(new Intent(this, CameraGLTestActivity.class));
                 break;
         }
 

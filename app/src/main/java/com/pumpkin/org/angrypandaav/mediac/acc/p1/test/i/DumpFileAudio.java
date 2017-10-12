@@ -1,6 +1,7 @@
 package com.pumpkin.org.angrypandaav.mediac.acc.p1.test.i;
 
 import android.os.Environment;
+import android.util.Log;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -47,6 +48,7 @@ public class DumpFileAudio implements IDumpAudio {
         if (outputStream != null) {
             try {
                 outputStream.write(data, 0, len);
+                Log.i("STREAM", "data : " + data.toString());
             } catch (IOException e) {
                 e.printStackTrace();
             }
