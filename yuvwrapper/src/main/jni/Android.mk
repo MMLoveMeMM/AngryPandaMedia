@@ -2,31 +2,33 @@ LOCAL_PATH:= $(call my-dir)
 
 include $(CLEAR_VARS)
 
-LOCAL_CPP_EXTENSION := .cc
+LOCAL_MAIN :=$(LOCAL_PATH)
+include $(LOCAL_PATH)/libyuv/libs/Android.mk
 
-LOCAL_YUV_DIR_LIST :=$(wildcard $(LOCAL_PATH)/libyuv/source/*.cc)
+include $(CLEAR_VARS)
+
+LOCAL_PATH :=$(LOCAL_MAIN)
+LOCAL_STATIC_LIBRARIES += libyuv
+
+LOCAL_CPP_EXTENSION := .cc .cpp
+
+LOCAL_YUV_DIR_LIST :=$(wildcard $(LOCAL_PATH)/libyuv/src/*.cpp)
 LOCAL_YUV_FILES := $(LOCAL_YUV_DIR_LIST:$(LOCAL_PATH)/%=%)
-$(warning $(LOCAL_YUV_FILES))
-LOCAL_SRC_FILES := $(LOCAL_YUV_FILES)
 
-# TODO(fbarchard): Enable mjpeg encoder.
-#   source/mjpeg_decoder.cc
-#   source/convert_jpeg.cc
-#   source/mjpeg_validate.cc
+LOCAL_JNI_DIR_LIST := jni_core_module.cpp \
+                        jni_utils_module.cpp \
+                        jni_yuv_module.cpp
 
-ifeq ($(TARGET_ARCH_ABI),armeabi-v7a)
-    LOCAL_CFLAGS += -DLIBYUV_NEON
-    LOCAL_SRC_FILES += \
-        source/compare_neon.cc.neon    \
-        source/rotate_neon.cc.neon     \
-        source/row_neon.cc.neon        \
-        source/scale_neon.cc.neon
-endif
+LOCAL_SRC_FILES :=  $(LOCAL_YUV_FILES) \
+                    $(LOCAL_JNI_DIR_LIST)
 
-LOCAL_EXPORT_C_INCLUDES := $(LOCAL_PATH)/libyuv/include
-LOCAL_C_INCLUDES += $(LOCAL_PATH)/libyuv/include
+LOCAL_C_INCLUDES += $(LOCAL_PATH)/libyuv/include \
+                    $(LOCAL_PATH)/libyuv/include/libyuv \
+                    $(LOCAL_PATH)/libyuv/src \
+                    ./
 
-LOCAL_MODULE := libyuv
+LOCAL_MODULE := libusingyuv
 LOCAL_MODULE_TAGS := optional
+LOCAL_LDLIBS += -L$(SYSROOT)/usr/lib -llog
 
-include $(BUILD_STATIC_LIBRARY)
+include $(BUILD_SHARED_LIBRARY)

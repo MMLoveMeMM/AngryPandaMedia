@@ -6,9 +6,22 @@
     android:layout_height="match_parent"
     tools:context="com.pumpkin.org.angrypandaav.x264.X264TestActivity">
 
-    <SurfaceView
-        android:id="@+id/surfaceview"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <SurfaceView
+            android:id="@+id/surfaceview"
+            android:layout_width="match_parent"
+            android:layout_height="420dp" />
+
+        <Button
+            android:id="@+id/stop"
+            android:text="stop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
 
 </android.support.constraint.ConstraintLayout>

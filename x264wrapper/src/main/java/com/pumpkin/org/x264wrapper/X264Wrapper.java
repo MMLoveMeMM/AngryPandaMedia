@@ -1,5 +1,7 @@
 package com.pumpkin.org.x264wrapper;
 
+import com.apkfuns.logutils.LogUtils;
+
 import java.nio.ByteBuffer;
 
 /**
@@ -22,6 +24,11 @@ public class X264Wrapper {
 
     public native void uninitX264Encode();
 
+    public void setListener(Ix264Listener listener) {
+        this.listener = listener;
+        LogUtils.i("call back listener init set !");
+    }
+
     public void onFrame(byte[] buffer, int length, long time) {
         if (mH264buffer == null || mH264buffer.capacity() < length) {
             mH264buffer = ByteBuffer.allocateDirect(((length / 1024) + 1) * 1024);
@@ -32,7 +39,14 @@ public class X264Wrapper {
     }
 
     private void H264DataCallBackFunc(byte[] buffer, int length) {
-        listener.onFrameH264(buffer, length);
+        LogUtils.i("call back buffer len : " + length);
+        LogUtils.i("call back buffer : " + buffer);
+        if (listener != null) {
+            listener.onFrameH264(buffer, length);
+        } else {
+            LogUtils.i("call back listener is null !");
+        }
+
     }
 
 }

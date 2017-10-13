@@ -27,7 +27,10 @@ LOCAL_X264_FILES := $(LOCAL_X264_DIR_LIST:$(LOCAL_PATH)/%=%)
 
 LOCAL_SRC_FILES := $(LOCAL_YUV_FILES) \
                     $(LOCAL_X264_FILES)
-LOCAL_SRC_FILES += jni_core_module.cpp jni_utils_module.cpp jni_x264_module.cpp
+LOCAL_SRC_FILES += jni_core_module.cpp \
+                    jni_utils_module.cpp \
+                    jni_callback_module.cpp \
+                    jni_x264_module.cpp
 
 LOCAL_LDLIBS += -L$(SYSROOT)/usr/lib -llog
 

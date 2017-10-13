@@ -9,7 +9,6 @@ public class X264EncodeProxy {
     private static X264EncodeProxy instance;
 
     private X264Wrapper mX264Wrapper;
-    private Ix264Listener mIx264Listener;
 
     public static synchronized X264EncodeProxy getInstance() {
         if (instance == null) {
@@ -22,8 +21,8 @@ public class X264EncodeProxy {
         mX264Wrapper = new X264Wrapper();
     }
 
-    public void setmIx264Listener(Ix264Listener listener) {
-        mIx264Listener = listener;
+    public void setIx264Listener(Ix264Listener listener) {
+        mX264Wrapper.setListener(listener);
     }
 
     public void InitX264Encode(int width, int height, int fps, int bite) {
@@ -38,15 +37,6 @@ public class X264EncodeProxy {
 
         mX264Wrapper.onFrame(buffer, length, time);
 
-    }
-
-    public int EncoderH264(int length, long time) {
-        int result = -1;
-        if (mX264Wrapper != null) {
-            result = mX264Wrapper.encoderH264(length, time);
-        }
-
-        return result;
     }
 
     public void UninitX264Encode() {

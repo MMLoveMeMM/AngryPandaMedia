@@ -9,6 +9,7 @@ import android.widget.Button;
 import com.pumpkin.org.angrypandaav.manager.camera.test.CameraGLTestActivity;
 import com.pumpkin.org.angrypandaav.manager.camera.test.CameraTestActivity;
 import com.pumpkin.org.angrypandaav.mediac.acc.p1.test.t1.AudioEncoderP1Act;
+import com.pumpkin.org.angrypandaav.x264.X264TestActivity;
 
 
 public class MainActivity extends Activity implements View.OnClickListener{
@@ -31,7 +32,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
         int id=v.getId();
         switch (id) {
             case R.id.camera_mc:
-                startActivity(new Intent(this, CameraGLTestActivity.class));
+                startActivity(new Intent(this, X264TestActivity.class));
                 break;
         }
 

@@ -3,6 +3,7 @@
 //
 #include <jni.h>
 #include "jni_core_module.h"
+#include "x264encodeproxy.h"
 #ifndef ANGRYPANDAAV_JNI_X264_MODULE_H
 #define ANGRYPANDAAV_JNI_X264_MODULE_H
 #ifdef __cplusplus

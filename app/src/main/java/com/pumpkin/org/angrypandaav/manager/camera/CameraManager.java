@@ -26,8 +26,8 @@ public class CameraManager implements Camera.PreviewCallback {
 
     private static final CameraManager ourInstance = new CameraManager();
 
-    private int height = 1280;
-    private int width = 720;
+    public int height = 1280;
+    public int width = 720;
 
     private SurfaceHolder surfaceHolder;
     private Camera mCamera;
@@ -83,6 +83,9 @@ public class CameraManager implements Camera.PreviewCallback {
                     parameters = mCamera.getParameters();
                 }
 
+                /*
+                * 获取相机支持的预览尺寸
+                * */
                 List<Camera.Size> pszize = parameters.getSupportedPreviewSizes();
                 if (null != pszize && 0 < pszize.size()) {
                     int height[] = new int[pszize.size()];// 声明一个数组
@@ -96,12 +99,26 @@ public class CameraManager implements Camera.PreviewCallback {
                         Log.d(TAG, "size.width:" + sizewidth + "\tsize.height:" + sizeheight);
                     }
                     Arrays.sort(height);
-                    // 设置
+                    // 如果拍照需要设置
                     //parameters.setPictureSize(map.get(height[0]),height[0]);
                     //parameters.setPreviewSize(map.get(height[0]),height[0]);
                 }
 
+                /*
+                * 获取相机支持的预览格式
+                * */
+                List<Integer> previewFormats = mCamera.getParameters().getSupportedPreviewFormats();
                 parameters.setPreviewFormat(ImageFormat.NV21);//如果是图片,则设置为PixelFormat.JPEG等
+                /*
+                * 获取相机支持的预览帧率
+                * */
+                List<Integer> previewFrameRates = mCamera.getParameters().getSupportedPreviewFrameRates();
+                int fpsrang[] = new int[2]; // [0] : min ,[1] : max
+                mCamera.getParameters().getPreviewFpsRange(fpsrang);
+                for (int i = 0; i < fpsrang.length; i++) {
+                    Log.i(TAG, "fps support arange : " + fpsrang[i]);
+                }
+                mCamera.getParameters().setPreviewFpsRange(fpsrang[0], fpsrang[1]);
                 /*
                 * 这个预览尺寸是一个坑
                 * 一定要参照上面系统支持的种类,而且要注意width和height
@@ -123,6 +140,7 @@ public class CameraManager implements Camera.PreviewCallback {
                 List<Camera.Size> previewSizes = parameters.getSupportedPreviewSizes();
                 Camera.Size previewSize = CameraUtils.getProperSize4Ratio(previewSizes, (float) videoWidth / videoHeight);
                 Log.i(TAG, "previewSize.width : " + previewSize.width + " previewSize.height : " + previewSize.height);
+
                 parameters.setPreviewSize(previewSize.width, previewSize.height);
 
                 /*
