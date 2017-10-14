@@ -54,7 +54,7 @@ JNIEXPORT jint JNICALL
         // TODO
         LOGI("Java_com_pumpkin_org_x264wrapper_X264Wrapper_encoderH264");
         /*
-        * 每次都这样去拿那个buffer,是不是有点坑爹
+        * 每次都这样去拿那个buffer,减少内存拷贝次数,这个有点秒
         */
         jobject input = (jobject) env->GetObjectField(user_obj, drain_yuvbuffer);
         unsigned char * jb = (unsigned char *) env->GetDirectBufferAddress(input);
