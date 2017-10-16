@@ -9,6 +9,8 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/ffmpegwrapper" />
+            <option value="$PROJECT_DIR$/openclwrapper" />
             <option value="$PROJECT_DIR$/x264wrapper" />
             <option value="$PROJECT_DIR$/yuvwrapper" />
           </set>

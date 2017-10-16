@@ -6,8 +6,6 @@ namespace liborg{
 extern "C"{
 #endif
 
-#include "stdint.h"
-
 void NV21ToI420(unsigned char* dstyuv,unsigned char* data, int imageWidth, int imageHeight);
 
 #ifdef __cplusplus

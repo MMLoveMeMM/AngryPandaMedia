@@ -4,6 +4,8 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/AngryPandaAV.iml" filepath="$PROJECT_DIR$/AngryPandaAV.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ffmpegwrapper/ffmpegwrapper.iml" filepath="$PROJECT_DIR$/ffmpegwrapper/ffmpegwrapper.iml" />
+      <module fileurl="file://$PROJECT_DIR$/openclwrapper/openclwrapper.iml" filepath="$PROJECT_DIR$/openclwrapper/openclwrapper.iml" />
       <module fileurl="file://$PROJECT_DIR$/x264wrapper/x264wrapper.iml" filepath="$PROJECT_DIR$/x264wrapper/x264wrapper.iml" />
       <module fileurl="file://$PROJECT_DIR$/yuvwrapper/yuvwrapper.iml" filepath="$PROJECT_DIR$/yuvwrapper/yuvwrapper.iml" />
     </modules>

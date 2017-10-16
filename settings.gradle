@@ -1,1 +1,1 @@
-include ':app', ':x264wrapper', ':yuvwrapper'
+include ':app', ':x264wrapper', ':yuvwrapper', ':openclwrapper', ':ffmpegwrapper'

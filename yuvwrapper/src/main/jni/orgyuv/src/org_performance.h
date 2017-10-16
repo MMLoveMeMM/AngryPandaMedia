@@ -11,7 +11,6 @@ void detailPic90(unsigned char* d, unsigned char* yuv_temp, int nw, int nh, int 
 void detailPic180(unsigned char* d, unsigned char* yuv_temp, int nw, int nh, int w, int h);
 void detailPic270(unsigned char* d, unsigned char* yuv_temp, int nw, int nh, int w, int h);
 
-
 #ifdef __cplusplus
 }
 }
