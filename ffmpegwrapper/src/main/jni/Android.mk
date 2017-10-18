@@ -1,43 +1,37 @@
-LOCAL_PATH:= $(call my-dir)
+LOCAL_PATH := $(call my-dir)
+
+include $(CLEAR_VARS)
+LOCAL_MODULE := avcodec
+LOCAL_SRC_FILES := prebuilt/libavcodec-57.so
+include $(PREBUILT_SHARED_LIBRARY)
+
+include $(CLEAR_VARS)
+LOCAL_MODULE := avformat
+LOCAL_SRC_FILES := prebuilt/libavformat-57.so
+include $(PREBUILT_SHARED_LIBRARY)
+
+include $(CLEAR_VARS)
+LOCAL_MODULE := avutil
+LOCAL_SRC_FILES := prebuilt/libavutil-55.so
+include $(PREBUILT_SHARED_LIBRARY)
+
+include $(CLEAR_VARS)
+LOCAL_MODULE := swresample
+LOCAL_SRC_FILES := prebuilt/libswresample-2.so
+include $(PREBUILT_SHARED_LIBRARY)
+
+include $(CLEAR_VARS)
+LOCAL_MODULE := swscale
+LOCAL_SRC_FILES := prebuilt/libswscale-4.so
+include $(PREBUILT_SHARED_LIBRARY)
 
 include $(CLEAR_VARS)
 
-LOCAL_MAIN :=$(LOCAL_PATH)
+LOCAL_SRC_FILES := ffmpegwrapper.c
+LOCAL_LDLIBS += -llog -lz -landroid
+LOCAL_MODULE := swsprocess
+LOCAL_C_INCLUDES += $(LOCAL_PATH)/include
 
-include $(LOCAL_MAIN)/ffmpeg/libs/Android.mk
-
-include $(LOCAL_MAIN)/xlog/libs/Android.mk
-
-include $(CLEAR_VARS)
-
-LOCAL_PATH :=$(LOCAL_MAIN)
-LOCAL_SHARED_LIBRARIES := avcodec avdevice avfilter avformat avutil postproc swresample swscale
-LOCAL_SHARED_LIBRARIES += xlog #增加一个日志打印方式,cpp那边尽量不使用jni里面日志,保持和jni没有耦合性,方便跨平台
-
-LOCAL_FFMPEG_DIR_LIST :=$(wildcard $(LOCAL_PATH)/ffmpeg/src/base/*.cpp)
-LOCAL_FFMPEG_FILES := $(LOCAL_FFMPEG_DIR_LIST:$(LOCAL_PATH)/%=%)
-
-LOCAL_FFMPEG_CODEC_DIR_LIST :=$(wildcard $(LOCAL_PATH)/ffmpeg/src/codec/*.cpp)
-LOCAL_FFMPEG_CODEC_FILES := $(LOCAL_FFMPEG_CODEC_DIR_LIST:$(LOCAL_PATH)/%=%)
-
-LOCAL_FFMPEG_SWS_DIR_LIST :=$(wildcard $(LOCAL_PATH)/ffmpeg/src/sws/*.cpp)
-LOCAL_FFMPEG_SWS_FILES := $(LOCAL_FFMPEG_SWS_DIR_LIST:$(LOCAL_PATH)/%=%)
-
-LOCAL_JNI_DIR_LIST := jni_core_module.cpp \
-                        jni_utils_module.cpp \
-                        jni_sws_module.cpp \
-
-LOCAL_C_INCLUDES +=  $(LOCAL_PATH)/ffmpeg/include \
-                     $(LOCAL_PATH)/ffmpeg \
-                     $(LOCAL_PATH)/xlog/include \
-                     ./
-$(warning $(LOCAL_C_INCLUDES))
-
-LOCAL_SRC_FILES :=  $(LOCAL_JNI_DIR_LIST)
-
-LOCAL_MODULE := libffmpeg
-LOCAL_MODULE_TAGS := optional
-LOCAL_LDLIBS += -L$(SYSROOT)/usr/lib -llog -lz
-LOCAL_LDLIBS += -latomic # 这个需要对应Application添加支持
+LOCAL_SHARED_LIBRARIES:= avcodec avformat avutil swresample swscale
 
 include $(BUILD_SHARED_LIBRARY)
