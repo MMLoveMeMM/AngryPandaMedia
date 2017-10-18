@@ -58,3 +58,11 @@ JNIEXPORT jint JNICALL Java_com_pumpkin_org_ffmpegwrapper_FfmpegClose
     return 0;
   }
 
+static JNINativeMethod CodecMethods[] = {
+        {"FfmpegInit", "(IILjava/lang/String;)I",(void *)Java_com_pumpkin_org_ffmpegwrapper_FfmpegInit},
+        {"FfmpegOnFrame", "([B)I",(void *)Java_com_pumpkin_org_ffmpegwrapper_FfmpegOnFrame},
+        {"FfmpegClose","()I",(void *)Java_com_pumpkin_org_ffmpegwrapper_FfmpegClose}};
+
+int register_android_jni_codec_module(JNIEnv* env, jclass clazz){
+        return jniRegisterNativeMethods(env, clazz, CodecMethods, sizeof(CodecMethods) / sizeof(CodecMethods[0]));
+}

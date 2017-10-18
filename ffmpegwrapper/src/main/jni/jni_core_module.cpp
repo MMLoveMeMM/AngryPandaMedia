@@ -14,7 +14,7 @@ JavaVM *g_JavaVM = NULL;
 const char* g_java_class_name[] = {
         "java/lang/String",
         "java/lang/Integer",
-        "com/pumpkin/org/yuvwrapper/YuvWrapper"
+        "com/pumpkin/org/ffmpegwrapper/codecwrapper"
 };
 
 jobject g_java_class_obj[JAVA_CLASS_MAX] = { NULL };
@@ -86,16 +86,16 @@ JNIEXPORT jint JNI_OnLoad(JavaVM *vm, void *reserved)
         goto error;
     }
 
-    /* if (register_android_jni_yuv_module(env,clazz) != JNI_OK){
+    if (register_android_jni_sws_module(env,clazz) != JNI_OK){
         goto error;
-    } */
+    }
 
     JNI_DELETE_LOCAL_REF(clazz);
 
     //load global object
     for (int i = 0; i < JAVA_CLASS_MAX; i++)
     {
-    JNI_initClassHelper(env, (const char *)JNI_GET_CLASS_NAME(i), &JNI_GET_CLASS_OBJ(i), &JNI_GET_CLASS_CONSTRUCT_METHODE(i), (JAVA_CLASS_TYPE)i);
+        JNI_initClassHelper(env, (const char *)JNI_GET_CLASS_NAME(i), &JNI_GET_CLASS_OBJ(i), &JNI_GET_CLASS_CONSTRUCT_METHODE(i), (JAVA_CLASS_TYPE)i);
     }
 
     result = JNI_VERSION_1_6;

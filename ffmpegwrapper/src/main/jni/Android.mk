@@ -20,20 +20,20 @@ LOCAL_FFMPEG_FILES := $(LOCAL_FFMPEG_DIR_LIST:$(LOCAL_PATH)/%=%)
 LOCAL_FFMPEG_CODEC_DIR_LIST :=$(wildcard $(LOCAL_PATH)/ffmpeg/src/codec/*.cpp)
 LOCAL_FFMPEG_CODEC_FILES := $(LOCAL_FFMPEG_CODEC_DIR_LIST:$(LOCAL_PATH)/%=%)
 
+LOCAL_FFMPEG_SWS_DIR_LIST :=$(wildcard $(LOCAL_PATH)/ffmpeg/src/sws/*.cpp)
+LOCAL_FFMPEG_SWS_FILES := $(LOCAL_FFMPEG_SWS_DIR_LIST:$(LOCAL_PATH)/%=%)
+
 LOCAL_JNI_DIR_LIST := jni_core_module.cpp \
                         jni_utils_module.cpp \
-                        jni_codec_module.cpp
+                        jni_sws_module.cpp \
 
-LOCAL_SRC_FILES :=  $(LOCAL_FFMPEG_FILES) \
-                    $(LOCAL_FFMPEG_CODEC_FILES) \
-                    $(LOCAL_JNI_DIR_LIST)
-
-LOCAL_C_INCLUDES +=  $(LOCAL_PATH)/ffmpeg/src/base \
-                     $(LOCAL_PATH)/ffmpeg/src/codec \
-                     $(LOCAL_PATH)/ffmpeg/include \
+LOCAL_C_INCLUDES +=  $(LOCAL_PATH)/ffmpeg/include \
                      $(LOCAL_PATH)/ffmpeg \
                      $(LOCAL_PATH)/xlog/include \
                      ./
+$(warning $(LOCAL_C_INCLUDES))
+
+LOCAL_SRC_FILES :=  $(LOCAL_JNI_DIR_LIST)
 
 LOCAL_MODULE := libffmpeg
 LOCAL_MODULE_TAGS := optional

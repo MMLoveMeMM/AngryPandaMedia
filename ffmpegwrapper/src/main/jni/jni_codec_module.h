@@ -12,6 +12,8 @@ extern "C"
 {
 #endif
 
+int register_android_jni_codec_module(JNIEnv* env, jclass clazz);
+
 /*
  * Class:     com_pumpkin_org_ffmpegwrapper
  * Method:    FfmpegInit

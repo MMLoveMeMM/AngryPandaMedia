@@ -10,9 +10,10 @@
 #include <string>
 #include "jni_utils_module.h"
 #include "jni_codec_module.h"
+#include "jni_sws_module.h"
 
-#ifndef _Included_jni_comm
-#define _Included_jni_comm
+#ifndef _Included_jni_comm__
+#define _Included_jni_comm__
 
 //global java vm and env
 extern JavaVM *g_JavaVM;
