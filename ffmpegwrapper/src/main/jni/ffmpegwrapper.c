@@ -6,7 +6,7 @@
 #include <android/native_window_jni.h>
 #include "log.h"
 
-JNIEXPORT jint JNICALL Java_jonesx_videoplayer_VideoPlayer_play
+JNIEXPORT jint JNICALL Java_jonesx_videoplayer_VideoPlayer_swsprocess
         (JNIEnv * env, jclass clazz, jobject surface)
 {
     LOGD("play");

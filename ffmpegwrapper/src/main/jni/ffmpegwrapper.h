@@ -11,7 +11,7 @@ extern "C" {
  * Method:    swsprocess
  * Signature: (Ljava/lang/Object;)I
  */
-JNIEXPORT jint JNICALL Java_com_pumpkin_org_ffmpegwrapper_ffmpegwrapper_play
+JNIEXPORT jint JNICALL Java_com_pumpkin_org_ffmpegwrapper_ffmpegwrapper_swsprocess
   (JNIEnv *, jclass, jobject);
 
 #ifdef __cplusplus
