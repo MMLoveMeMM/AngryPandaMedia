@@ -98,6 +98,10 @@ JNIEXPORT jint JNI_OnLoad(JavaVM *vm, void *reserved)
         goto error;
     }
 
+    if (register_android_jni_filter_module(env,clazz) != JNI_OK){
+        goto error;
+    }
+
     JNI_DELETE_LOCAL_REF(clazz);
 
     //load global object
