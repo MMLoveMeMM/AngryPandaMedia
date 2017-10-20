@@ -58,6 +58,7 @@ public class FFMpegThread extends Thread {
                     processstate = EncodeMachine.IDLE_CODEC_STATE;
                     break;
                 case INIT_STATE:
+                    LogUtils.i("initencode **************");
                     if (processstate == EncodeMachine.IDLE_CODEC_STATE) {
                         LogUtils.i("initencode +++++++++++++++++++++++");
                         state = FFMpegMachine.IDLE_STATE;//初始化以后等待
@@ -66,10 +67,13 @@ public class FFMpegThread extends Thread {
                             LogUtils.e("encode fail ...");
                         } else {
                             processstate = EncodeMachine.INIT_CODEC_STATE;
+                            state = FFMpegMachine.DOING_STATE;
+                            LogUtils.e("encode device OK ...");
                         }
                     }
                     break;
                 case DOING_STATE:
+                    //LogUtils.i("doing encoding entry !");
                     if (processstate == EncodeMachine.INIT_CODEC_STATE || processstate == EncodeMachine.DOING_CODEC_STATE) {
                         if (!queue.isEmpty()) {
                         /*
@@ -77,6 +81,7 @@ public class FFMpegThread extends Thread {
                         * */
                             byte[] datas;
                             try {
+                                LogUtils.i("doing encoding ...");
                                 datas = queue.take(); // 如果没有数据,这个地方会blocking
                                 if (datas != null) {
                                     FFmpegWrapperProxy.getInstance().onframe(datas);
@@ -84,8 +89,8 @@ public class FFMpegThread extends Thread {
                             } catch (InterruptedException e) {
                                 e.printStackTrace();
                             }
-                            processstate = EncodeMachine.DOING_CODEC_STATE;
                         }
+                        processstate = EncodeMachine.DOING_CODEC_STATE;
                     }
 
                     break;
@@ -112,6 +117,7 @@ public class FFMpegThread extends Thread {
         this.height = height;
 
         state = FFMpegMachine.INIT_STATE;
+        processstate = EncodeMachine.IDLE_CODEC_STATE;
     }
 
     public void startFFMpeg() {
@@ -120,6 +126,7 @@ public class FFMpegThread extends Thread {
 
     public void closeFFMpeg() {
         state = FFMpegMachine.CLOSE_STATE;
+        processstate = EncodeMachine.IDLE_CODEC_STATE;
     }
 
 }

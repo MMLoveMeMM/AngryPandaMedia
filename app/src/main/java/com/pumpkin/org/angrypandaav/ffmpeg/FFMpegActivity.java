@@ -21,6 +21,9 @@ public class FFMpegActivity extends Activity implements SurfaceHolder.Callback, 
 
     private FFMpegThread ffMpegThread;
 
+    /*
+    * 这个队列后面改到native中用C++内存池管理
+    * */
     private final static int MAX_QUEUE = 10;
     private ArrayBlockingQueue<byte[]> queue = new ArrayBlockingQueue<byte[]>(MAX_QUEUE);
 
@@ -38,7 +41,7 @@ public class FFMpegActivity extends Activity implements SurfaceHolder.Callback, 
         mCameraManager.setOnFrameListener(this);
 
         ffMpegThread = new FFMpegThread(queue);
-        ffMpegThread.initFFMpeg(mCameraManager.width, mCameraManager.height);
+
     }
 
     @Override
@@ -48,9 +51,7 @@ public class FFMpegActivity extends Activity implements SurfaceHolder.Callback, 
         mCameraManager.startCamera();
 
         ffMpegThread.start();
-
-        ffMpegThread.startFFMpeg();
-
+        ffMpegThread.initFFMpeg(mCameraManager.width, mCameraManager.height);
 
     }
 
