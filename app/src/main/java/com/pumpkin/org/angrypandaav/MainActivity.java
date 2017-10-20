@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.pumpkin.org.angrypandaav.ffmpeg.ConvertActivity;
+import com.pumpkin.org.angrypandaav.ffmpeg.FFMpegActivity;
+import com.pumpkin.org.angrypandaav.ffmpeg.FilterActivity;
 import com.pumpkin.org.angrypandaav.manager.camera.test.CameraGLTestActivity;
 import com.pumpkin.org.angrypandaav.manager.camera.test.CameraTestActivity;
 import com.pumpkin.org.angrypandaav.mediac.acc.p1.test.t1.AudioEncoderP1Act;
@@ -19,7 +22,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.main_start);
 
         mCameraMCBtn=(Button)findViewById(R.id.camera_mc);
         mCameraMCBtn.setOnClickListener(this);
@@ -32,7 +35,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
         int id=v.getId();
         switch (id) {
             case R.id.camera_mc:
-                startActivity(new Intent(this, X264TestActivity.class));
+                startActivity(new Intent(this, FFMpegActivity.class));
                 break;
         }
 

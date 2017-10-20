@@ -6,6 +6,7 @@ package com.panda.org.ffmpegextwrapper;
  */
 
 public class FFmpegWrapperProxy {
+
     private static final FFmpegWrapperProxy ourInstance = new FFmpegWrapperProxy();
 
     private FFmpegWrapper fFmpegWrapper;
@@ -28,6 +29,35 @@ public class FFmpegWrapperProxy {
     * */
     public int MP4ToYUVDecode(String srcpath, String destpath) {
         return fFmpegWrapper.decode(srcpath, destpath);
+    }
+
+
+    /*
+    * filter
+    * */
+    public int filter(Object surface, String srcpath) {
+        return fFmpegWrapper.filter(surface, srcpath);
+    }
+
+    /*
+    * 实时处理编码
+    * */
+    public int initencode(int width, int height) {
+        return fFmpegWrapper.initencode(width, height);
+    }
+
+    public int onframe(byte[] yuvimage) {
+
+        return fFmpegWrapper.onframe(yuvimage);
+
+    }
+
+    public int flush() {
+        return fFmpegWrapper.flush();
+    }
+
+    public int closeencode() {
+        return fFmpegWrapper.closeencode();
     }
 
 }

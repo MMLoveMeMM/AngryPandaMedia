@@ -62,7 +62,10 @@
         <activity android:name=".mediac.acc.p1.test.t2.AudioDecoderP1Act" />
         <activity android:name=".manager.camera.test.CameraTestActivity" />
         <activity android:name=".manager.camera.test.CameraGLTestActivity" />
-        <activity android:name=".x264.X264TestActivity"></activity>
+        <activity android:name=".x264.X264TestActivity" />
+        <activity android:name=".ffmpeg.FilterActivity" />
+        <activity android:name=".ffmpeg.ConvertActivity" />
+        <activity android:name=".ffmpeg.FFMpegActivity"></activity>
     </application>
 
 </manifest>

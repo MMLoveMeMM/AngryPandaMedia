@@ -36,7 +36,7 @@ JNIEXPORT jint JNICALL
 Java_com_panda_org_ffmpegextwrapper_FFmpegWrapper_initencode(
         JNIEnv *env,jobject thiz,jint width,jint height){
 
-    const char* out_path = "/sdcard/zhanghui/testffmpeg.flv";
+    const char* out_path = "/storage/emulated/0/testffmpeg.flv";//"/sdcard/zhanghui/testffmpeg.flv";
 	yuv_width=width;
 	yuv_height=height;
 	y_length=width*height;

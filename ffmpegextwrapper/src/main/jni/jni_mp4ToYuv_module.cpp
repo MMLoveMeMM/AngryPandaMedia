@@ -3,7 +3,23 @@
 #include <stdio.h>
 
 using namespace std;
+/*
+* 传入线程两个资源路径参数
+*/
+struct respath{
+    char* msrcpath;
+    char* mdestpath;
+};
 
+typedef struct respath RESPATH;
+RESPATH *path;
+RESPATH rpath;
+
+/*
+* 开辟一个native线程
+*/
+pthread_mutex_t mutexlock;
+pthread_t pth;
 /*
 * 自定义ffmpeg 日志
 */
@@ -16,14 +32,7 @@ void ffmpeg_log(void *ptr, int level, const char* fmt, va_list vl){
     }
 }
 
-/*
- * Class:     com_panda_org_ffmpegextwrapper_FFmpegWrapper
- * Method:    decode
- * Signature: (Ljava/lang/String;Ljava/lang/String;)I
- */
-JNIEXPORT jint JNICALL
-Java_com_panda_org_ffmpegextwrapper_FFmpegWrapper_decode(
-        JNIEnv *env,jobject thiz, jstring srcpath, jstring destpath){
+int encode(char* srcpath,char* destpath){
 
     AVFormatContext *pFormatCtx;
     int             i, videoindex;
@@ -43,8 +52,8 @@ Java_com_panda_org_ffmpegextwrapper_FFmpegWrapper_decode(
     char input_str[500]={0};
     char output_str[500]={0};
     char info[1000]={0};
-    sprintf(input_str,"%s",env->GetStringUTFChars(srcpath, NULL));
-    sprintf(output_str,"%s",env->GetStringUTFChars(destpath, NULL));
+    sprintf(input_str,"%s",srcpath);
+    sprintf(output_str,"%s",destpath);
 
     /*
     * 设置日志回写
@@ -217,13 +226,59 @@ Java_com_panda_org_ffmpegextwrapper_FFmpegWrapper_decode(
     sprintf(info, "%s[Count     ]%d\n",info,frame_cnt);
 
     sws_freeContext(img_convert_ctx);
-
     fclose(fp_yuv);
-
     av_frame_free(&pFrameYUV);
     av_frame_free(&pFrame);
     avcodec_close(pCodecCtx);
     avformat_close_input(&pFormatCtx);
+    return 0;
+}
+
+void *threadencode(void *st){
+
+    path=(struct respath*)st;
+
+    /*
+    * 这个地方加锁不是必要的
+    * 没有涉及到共享变量
+    */
+    pthread_mutex_lock (&mutexlock);
+    encode(path->msrcpath,path->mdestpath);
+    pthread_mutex_unlock (&mutexlock);
+
+    pthread_mutex_destroy(&mutexlock);
+    pthread_exit(NULL);
+}
+
+void encode_thread(char* srcp,char* destp){
+
+
+    LOGI("encode_thread ... ");
+
+    rpath.msrcpath=srcp;
+    rpath.mdestpath=destp;
+
+    pthread_mutex_init(&mutexlock, NULL);
+    pthread_create(&pth, NULL, threadencode, (void *)&rpath);
+
+}
+
+/*
+ * Class:     com_panda_org_ffmpegextwrapper_FFmpegWrapper
+ * Method:    decode
+ * Signature: (Ljava/lang/String;Ljava/lang/String;)I
+ */
+JNIEXPORT jint JNICALL
+Java_com_panda_org_ffmpegextwrapper_FFmpegWrapper_decode(
+        JNIEnv *env,jobject thiz, jstring jsrcpath, jstring jdestpath){
+
+    LOGI("path destpath .........");
+    char* src = jstringToChar(env,jsrcpath);
+    char* dt = jstringToChar(env,jdestpath);
+
+    encode_thread(src,dt); // native层要使用线程,java层不需要放到单独的线程中
+
+    //encode(src,dt); //用这个要在java层放入线程中处理
 
     return 0;
 }
@@ -271,7 +326,7 @@ Java_com_panda_org_ffmpegextwrapper_FFmpegWrapper_avcodecinfo(
 static JNINativeMethod MP4TOYUVMethods[] =
 {
     {"decode", "(Ljava/lang/String;Ljava/lang/String;)I",(void *)Java_com_panda_org_ffmpegextwrapper_FFmpegWrapper_decode},
-    {"avcodecinfo", "()I",(void *)Java_com_panda_org_ffmpegextwrapper_FFmpegWrapper_avcodecinfo}
+    {"avcodecinfo", "()Ljava/lang/String;",(void *)Java_com_panda_org_ffmpegextwrapper_FFmpegWrapper_avcodecinfo}
 };
 
 int register_android_jni_mp4toyuv_module(JNIEnv* env, jclass clazz){
