@@ -29,7 +29,7 @@ public class FFmpegWrapper {
     public native int filter(Object surface, String srcpath);
 
     /*
-    * 实时处理编码
+    * 实时处理编码(需要x264支持)
     * */
     public native int initencode(int width, int height);
 
@@ -39,4 +39,33 @@ public class FFmpegWrapper {
 
     public native int closeencode();
 
+    /*
+    * swscale
+    * */
+    public native int swscale(String srcpath, String destpath);
+
+    /*
+    * mp4 to KTV
+    * */
+    public native int mp4Toktv(String srcpath, String destpath);
+
+    /*
+    * yuv to rgb
+    * */
+    public native int yuvTorgb(String srcpath, String destpath);
+
+    /*
+    * display in wallpaper
+    * */
+    public native int wallpaper(String showres, Object surface);
+
+    /*
+    * pcm to acc
+    * */
+    public native int pcmToacc(String srcpath, String destpath);
+
+    /*
+    * YUV数据编码为h264/h265
+    * */
+    public native int yuvToHxxx(String srcpath, String destpath);
 }

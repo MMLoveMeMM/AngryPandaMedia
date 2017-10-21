@@ -60,4 +60,11 @@ public class FFmpegWrapperProxy {
         return fFmpegWrapper.closeencode();
     }
 
+    /*
+    * display in wallpaper
+    * */
+    public int wallpaper(String showres, Object surface) {
+        return fFmpegWrapper.wallpaper(showres, surface);
+    }
+
 }

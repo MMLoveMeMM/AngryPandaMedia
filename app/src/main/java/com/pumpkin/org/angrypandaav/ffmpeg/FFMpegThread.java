@@ -5,8 +5,6 @@ import com.panda.org.ffmpegextwrapper.FFmpegWrapperProxy;
 
 import java.util.concurrent.ArrayBlockingQueue;
 
-import static com.pumpkin.org.angrypandaav.ffmpeg.FFMpegThread.FFMpegMachine.IDLE_STATE;
-
 /**
  * Created by rd0348 on 2017/10/20 0020.
  */
@@ -24,8 +22,6 @@ public class FFMpegThread extends Thread {
         CLOSE_STATE,
         IDLE_STATE
     }
-
-    ;
 
     enum EncodeMachine {
         IDLE_CODEC_STATE,

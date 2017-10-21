@@ -11,6 +11,9 @@ extern "C"
 #include "jni_nativewindow_module.h"
 #include "jni_filter_module.h"
 #include "jni_im_module.h"
+#include "jni_help_module.h"
+#include "jni_mp4ktv_module.h"
+
 #ifdef __cplusplus
 }
 #endif
