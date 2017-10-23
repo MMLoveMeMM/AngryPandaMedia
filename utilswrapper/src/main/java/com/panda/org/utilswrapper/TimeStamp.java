@@ -1,11 +1,10 @@
-package com.pumpkin.org.angrypandaav.dump;
+package com.panda.org.utilswrapper;
 
 /**
- * Created by rd0348 on 2017/10/12 0012.
+ * Created by rd0348 on 2017/10/23 0023.
  */
 
 public class TimeStamp {
-
     /*
     * getTime方法返回的就是10位的时间戳
     * */
@@ -14,5 +13,4 @@ public class TimeStamp {
         String str = String.valueOf(time);
         return str;
     }
-
 }

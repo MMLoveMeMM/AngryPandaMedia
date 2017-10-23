@@ -3,6 +3,8 @@ package com.pumpkin.org.angrypandaav.dump;
 import android.os.Environment;
 import android.util.Log;
 
+import com.panda.org.utilswrapper.TimeStamp;
+
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;

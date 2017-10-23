@@ -4,7 +4,7 @@ import android.media.MediaRecorder;
 import android.os.Environment;
 import android.util.Log;
 
-import com.pumpkin.org.angrypandaav.dump.TimeStamp;
+import com.panda.org.utilswrapper.TimeStamp;
 
 import java.io.File;
 import java.io.IOException;

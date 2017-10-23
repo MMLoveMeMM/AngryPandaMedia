@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.panda.org.extractorwrapper.test.ExtractorActivity;
 import com.pumpkin.org.angrypandaav.ffmpeg.ConvertActivity;
 import com.pumpkin.org.angrypandaav.ffmpeg.FFMpegActivity;
 import com.pumpkin.org.angrypandaav.ffmpeg.FilterActivity;
@@ -35,7 +36,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
         int id=v.getId();
         switch (id) {
             case R.id.camera_mc:
-                startActivity(new Intent(this, FFMpegActivity.class));
+                startActivity(new Intent(this, ExtractorActivity.class));
                 break;
         }
 
