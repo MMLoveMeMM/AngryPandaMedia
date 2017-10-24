@@ -41,10 +41,6 @@ public class ExtractorWrapper extends Thread {
         this.audiopath = apath;
     }
 
-    /*
-    * type = 0 : 分解mp4为单独的视频和单独的音频
-    * type = 1 :
-    * */
     public ExtractorWrapper(int type) {
         mProcessType = type;
     }
@@ -59,29 +55,38 @@ public class ExtractorWrapper extends Thread {
 
         mediaExtractor = new MediaExtractor();
 
+        LogUtils.i("mProcessType : " + mProcessType);
         switch (mProcessType) {
             case 0:
                 ExtractorMedia();
                 break;
             case 1:
+                muxerMedia();
                 break;
             case 2:
+                muxerAudio();
                 break;
             case 3:
-                ExtractorMedia();
-                LogUtils.e("mProcessType : 3");
+
+                muxerMedia();
+                muxerAudio();
+
                 String vpath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/123456.ved";
                 String apath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/123456.mp3";
-                LogUtils.e("vpath : " + vpath);
                 mixingVideo(vpath, apath);
-                LogUtils.e("mProcessType : 3 finish !");
+
                 break;
             default:
                 break;
         }
+        LogUtils.i("mProcessType : " + mProcessType + " finish !");
 
     }
 
+    /*
+    * 这个方法仅仅用于分离mp4,得到纯裸数据,不适合播放
+    * 也不能够用于合成
+    * */
     public void ExtractorMedia() {
 
         FileOutputStream videoOutputStream = null;
@@ -157,6 +162,9 @@ public class ExtractorWrapper extends Thread {
 
     }
 
+    /*
+    * 从mp4中分离出视频数据,并且重新添加视频头部和时间戳等信息
+    * */
     private void muxerMedia() {
 
         mediaExtractor = new MediaExtractor();
@@ -220,7 +228,7 @@ public class ExtractorWrapper extends Thread {
     }
 
     /*
-    * 单独分离mp3 中的音频
+    * 从mp4中分离出音频数据,并且重新添加音频头部和时间戳等信息
     * */
     private void muxerAudio() {
         mediaExtractor = new MediaExtractor();
@@ -255,7 +263,7 @@ public class ExtractorWrapper extends Thread {
                 mediaExtractor.readSampleData(byteBuffer, 0);
                 long thirdTime = mediaExtractor.getSampleTime();
                 stampTime = Math.abs(thirdTime - secondTime);
-                LogUtils.e(stampTime + "");
+                LogUtils.i(stampTime + "");
             }
 
             mediaExtractor.unselectTrack(audioIndex);
@@ -277,7 +285,7 @@ public class ExtractorWrapper extends Thread {
             mediaMuxer.stop();
             mediaMuxer.release();
             mediaExtractor.release();
-            LogUtils.e("finish");
+            LogUtils.i("finish");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -288,26 +296,19 @@ public class ExtractorWrapper extends Thread {
     * */
     private void mixingVideo(String vediopath, String audiopath) {
         try {
-            LogUtils.e("*****************000*****************");
             MediaExtractor videoExtractor = new MediaExtractor();
-            LogUtils.e("*****************000-222-111*****************");
             videoExtractor.setDataSource(vediopath);
-            LogUtils.e("*****************000-111*****************");
             MediaFormat videoFormat = null;
             int videoTrackIndex = -1;
             int videoTrackCount = videoExtractor.getTrackCount();
-            LogUtils.e("*****************000-222*****************");
             for (int i = 0; i < videoTrackCount; i++) {
                 videoFormat = videoExtractor.getTrackFormat(i);
                 String mimeType = videoFormat.getString(MediaFormat.KEY_MIME);
-                LogUtils.e("*****************000-222*****************");
                 if (mimeType.startsWith("video/")) {
                     videoTrackIndex = i;
                     break;
                 }
             }
-
-            LogUtils.e("*****************111*****************");
 
             MediaExtractor audioExtractor = new MediaExtractor();
             audioExtractor.setDataSource(audiopath);
@@ -323,8 +324,6 @@ public class ExtractorWrapper extends Thread {
                 }
             }
 
-            LogUtils.e("*****************222*****************");
-
             videoExtractor.selectTrack(videoTrackIndex);
             audioExtractor.selectTrack(audioTrackIndex);
 
@@ -335,8 +334,6 @@ public class ExtractorWrapper extends Thread {
             int writeVideoTrackIndex = mediaMuxer.addTrack(videoFormat);
             int writeAudioTrackIndex = mediaMuxer.addTrack(audioFormat);
             mediaMuxer.start();
-
-            LogUtils.e("*****************333*****************");
 
             ByteBuffer byteBuffer = ByteBuffer.allocate(500 * 1024);
             long sampleTime = 0;
@@ -354,7 +351,6 @@ public class ExtractorWrapper extends Thread {
             videoExtractor.unselectTrack(videoTrackIndex);
             videoExtractor.selectTrack(videoTrackIndex);
 
-            LogUtils.e("*****************444******************");
             while (true) {
                 int readVideoSampleSize = videoExtractor.readSampleData(byteBuffer, 0);
                 if (readVideoSampleSize < 0) {
