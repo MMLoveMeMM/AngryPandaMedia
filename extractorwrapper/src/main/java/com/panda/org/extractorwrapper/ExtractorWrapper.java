@@ -16,13 +16,15 @@ import java.nio.ByteBuffer;
 
 /**
  * Created by rd0348 on 2017/10/23 0023.
+ * MediaMuxer最多仅支持一个视频track和一个音频track，所以如果有多个音频track可以先把它们混合成为一个音频track然后再使用MediaMuxer封装到mp4容器中;
+ * 更多说明参加 : http://www.jianshu.com/p/aeadf260258a
  */
 
 public class ExtractorWrapper extends Thread {
 
     private String srcpath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/input.mp4";
-    private String vediopath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/" /*+ TimeStamp.getTimeStamp() */ + "123456.ved";
-    private String audiopath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/" /*+ TimeStamp.getTimeStamp()*/ + "123456.mp3";
+    private String vediopath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/" /*+ TimeStamp.getTimeStamp() */ + "123456.h264";
+    private String audiopath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/" /*+ TimeStamp.getTimeStamp()*/ + "123456.aac";
 
     private final String SDCARD_PATH = Environment.getExternalStorageDirectory().getAbsolutePath();
 
@@ -84,7 +86,7 @@ public class ExtractorWrapper extends Thread {
     }
 
     /*
-    * 这个方法仅仅用于分离mp4,得到纯裸数据,不适合播放
+    * 这个方法仅仅用于分离mp4,得到纯裸数据,没有添加PTS,不适合播放
     * 也不能够用于合成
     * */
     public void ExtractorMedia() {

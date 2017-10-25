@@ -13,6 +13,7 @@ extern "C"
 #include "jni_im_module.h"
 #include "jni_help_module.h"
 #include "jni_mp4ktv_module.h"
+#include "jni_mux_module.h"
 
 #ifdef __cplusplus
 }

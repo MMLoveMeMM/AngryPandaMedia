@@ -68,4 +68,17 @@ public class FFmpegWrapper {
     * YUV数据编码为h264/h265
     * */
     public native int yuvToHxxx(String srcpath, String destpath);
+
+    /*
+    * demux mp4 file to h264 and acc
+    * only get datas
+    * */
+    public native int demuxMp4(String srcpath, String vedpath, String audpath);
+
+    /*
+    * demux mp4 file to h264 and acc
+    * add PTS to header so that playing
+    * */
+    public native int demuxMp4ext(String srcpath, String vedpath, String audpath);
+
 }

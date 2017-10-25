@@ -67,4 +67,16 @@ public class FFmpegWrapperProxy {
         return fFmpegWrapper.wallpaper(showres, surface);
     }
 
+    public int demuxMp4(String srcpath, String vedpath, String audpath) {
+        return fFmpegWrapper.demuxMp4(srcpath, vedpath, audpath);
+    }
+
+    /*
+    * demux mp4 file to h264 and acc
+    * add PTS to header so that playing
+    * */
+    public int demuxMp4ext(String srcpath, String vedpath, String audpath) {
+        return fFmpegWrapper.demuxMp4ext(srcpath, vedpath, audpath);
+    }
+
 }
