@@ -47,7 +47,7 @@ public class FFmpegWrapper {
     /*
     * mp4 to KTV
     * */
-    public native int mp4Toktv(String srcpath, String destpath);
+    public native int mp4Toavi(String srcpath, String destpath);
 
     /*
     * yuv to rgb
@@ -80,5 +80,14 @@ public class FFmpegWrapper {
     * add PTS to header so that playing
     * */
     public native int demuxMp4ext(String srcpath, String vedpath, String audpath);
+
+    /*
+    * aac
+    */
+    public native int initRecord(String outpath);
+
+    public native int writeAudioData(byte[] datas);
+
+    public native int recordClose();
 
 }

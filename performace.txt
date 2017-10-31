@@ -7,3 +7,23 @@
 (2)摄像头默认返回图像为横屏图像（宽大于长）
 所以需要旋转。
 <4> : 如果前置摄像头需要镜像
+
+
+
+ffmpeg 说明:
+<1> mux
+解复用视频文件：就是提取出音频文件和视频文件的ES流数据。而对于aac和h264来说，提取出来的数据直接保存并不能成功的播放，
+原因就在ffmpeg解出的ES数据比较纯净，没有ADTS头，而很多解码器都是需要ADTS头信息来进行解码的，所以就要对aac数据进行头部adts结构的添加
+ 对于h264文件来说，h264有两种封装，
+一种是annexb模式，传统模式，有startcode，SPS和PPS是在ES中
+一种是mp4模式，一般mp4 mkv会有，没有startcode，SPS和PPS以及其它信息被封装在container中，每一个frame前面是这个frame的长度.
+很多解码器只支持annexb这种模式，因此需要将mp4做转换：
+在ffmpeg中用h264_mp4toannexb_filter可以做转换
+实现：
+注册filter
+avcbsfc = av_bitstream_filter_init("h264_mp4toannexb");
+转换bitstream
+av_bitstream_filter_filter(AVBitStreamFilterContext *bsfc,
+AVCodecContext *avctx, const char *args,
+uint8_t **poutbuf, int *poutbuf_size,
+const uint8_t *buf, int buf_size, int keyframe)

@@ -46,7 +46,8 @@ LOCAL_SRC_FILES := jni_core_module.cpp \
                     jni_sws_module.cpp \
                     jni_yuvTorgb_module.cpp \
                     jni_fencode_module.cpp \
-                    jni_mux_module.cpp
+                    jni_mux_module.cpp \
+                    jni_aac_module.cpp
 
 LOCAL_LDLIBS += -llog -lz -landroid
 LOCAL_LDLIBS += -lGLESv2 -ljnigraphics

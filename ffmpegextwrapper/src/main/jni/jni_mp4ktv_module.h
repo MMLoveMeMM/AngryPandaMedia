@@ -23,11 +23,11 @@ extern "C"
 int register_android_jni_mp4ktv_module(JNIEnv* env, jclass clazz);
 /*
  * Class:     com_panda_org_ffmpegextwrapper_FFmpegWrapper
- * Method:    mp4Toktv
+ * Method:    mp4Toavi
  * Signature: (Ljava/lang/String;Ljava/lang/String;)I
  */
 JNIEXPORT jint JNICALL
-Java_com_panda_org_ffmpegextwrapper_FFmpegWrapper_mp4Toktv(
+Java_com_panda_org_ffmpegextwrapper_FFmpegWrapper_mp4Toavi(
         JNIEnv *,jobject , jstring , jstring);
 
 #ifdef __cplusplus

@@ -3,7 +3,8 @@
     package="com.panda.org.extractorwrapper">
 
     <application>
-        <activity android:name=".test.ExtractorActivity"></activity>
+        <activity android:name=".test.ExtractorActivity" />
+        <activity android:name=".test.ExtractorExtActivity"></activity>
     </application>
 
 </manifest>

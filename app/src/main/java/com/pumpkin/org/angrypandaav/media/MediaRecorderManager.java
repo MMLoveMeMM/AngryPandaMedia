@@ -13,10 +13,10 @@ import java.io.IOException;
  * Created by rd0348 on 2017/10/21 0021.
  */
 
-public class AudioRecorderManager {
-    private static final AudioRecorderManager audInstance = new AudioRecorderManager();
+public class MediaRecorderManager {
+    private static final MediaRecorderManager audInstance = new MediaRecorderManager();
 
-    public static AudioRecorderManager getInstance() {
+    public static MediaRecorderManager getInstance() {
         return audInstance;
     }
 
@@ -35,13 +35,13 @@ public class AudioRecorderManager {
     /**
      * 文件存储默认sdcard/record
      */
-    public AudioRecorderManager() {
+    public MediaRecorderManager() {
 
         //默认保存路径为/sdcard/record/下
         this(Environment.getExternalStorageDirectory() + "/");
     }
 
-    public AudioRecorderManager(String filePath) {
+    public MediaRecorderManager(String filePath) {
 
         File path = new File(filePath);
         if (!path.exists())

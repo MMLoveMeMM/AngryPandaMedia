@@ -1,11 +1,11 @@
 #include "jni_mp4ktv_module.h"
 /*
  * Class:     com_panda_org_ffmpegextwrapper_FFmpegWrapper
- * Method:    mp4Toktv
+ * Method:    mp4Toavi
  * Signature: (Ljava/lang/String;Ljava/lang/String;)I
  */
 JNIEXPORT jint JNICALL
-Java_com_panda_org_ffmpegextwrapper_FFmpegWrapper_mp4Toktv(
+Java_com_panda_org_ffmpegextwrapper_FFmpegWrapper_mp4Toavi(
         JNIEnv *env,jobject thiz, jstring spath, jstring dpath){
 
     char* srcpath = jstringToChar(env,spath);
@@ -114,7 +114,7 @@ end:
 
 static JNINativeMethod MP4KTVMethods[] =
 {
-    {"mp4Toktv", "(Ljava/lang/String;Ljava/lang/String;)I",(void *)Java_com_panda_org_ffmpegextwrapper_FFmpegWrapper_mp4Toktv}
+    {"mp4Toavi", "(Ljava/lang/String;Ljava/lang/String;)I",(void *)Java_com_panda_org_ffmpegextwrapper_FFmpegWrapper_mp4Toavi}
 };
 
 int register_android_jni_mp4ktv_module(JNIEnv* env, jclass clazz){
