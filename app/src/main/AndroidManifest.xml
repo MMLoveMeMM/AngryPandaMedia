@@ -66,7 +66,8 @@
         <activity android:name=".ffmpeg.FilterActivity" />
         <activity android:name=".ffmpeg.ConvertActivity" />
         <activity android:name=".ffmpeg.FFMpegActivity" />
-        <activity android:name=".ffmpeg.MuxActivity"></activity>
+        <activity android:name=".ffmpeg.MuxActivity" />
+        <activity android:name=".media.test.MediaActivity"></activity>
     </application>
 
 </manifest>

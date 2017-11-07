@@ -79,4 +79,19 @@ public class FFmpegWrapperProxy {
         return fFmpegWrapper.demuxMp4ext(srcpath, vedpath, audpath);
     }
 
+    /*
+    * aac
+    */
+    public int initRecord(String outpath) {
+        return fFmpegWrapper.initRecord(outpath);
+    }
+
+    public int writeAudioData(byte[] datas) {
+        return fFmpegWrapper.writeAudioData(datas);
+    }
+
+    public int recordClose() {
+        return fFmpegWrapper.recordClose();
+    }
+
 }

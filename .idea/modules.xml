@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/AngryPandaAV.iml" filepath="$PROJECT_DIR$/AngryPandaAV.iml" />
+      <module fileurl="file://$PROJECT_DIR$/aacwrapper/aacwrapper.iml" filepath="$PROJECT_DIR$/aacwrapper/aacwrapper.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/extractorwrapper/extractorwrapper.iml" filepath="$PROJECT_DIR$/extractorwrapper/extractorwrapper.iml" />
       <module fileurl="file://$PROJECT_DIR$/ffmpegextwrapper/ffmpegextwrapper.iml" filepath="$PROJECT_DIR$/ffmpegextwrapper/ffmpegextwrapper.iml" />

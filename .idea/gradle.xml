@@ -8,6 +8,7 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/aacwrapper" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/extractorwrapper" />
             <option value="$PROJECT_DIR$/ffmpegextwrapper" />

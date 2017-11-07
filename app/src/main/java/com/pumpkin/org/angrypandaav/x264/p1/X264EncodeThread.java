@@ -7,6 +7,7 @@ import com.pumpkin.org.angrypandaav.dump.IDumpData;
 import com.pumpkin.org.x264wrapper.Ix264Listener;
 import com.pumpkin.org.x264wrapper.X264EncodeProxy;
 
+import java.io.IOException;
 import java.util.concurrent.ArrayBlockingQueue;
 
 /**
@@ -106,7 +107,7 @@ public class X264EncodeThread extends Thread implements Ix264Listener {
 
 
     @Override
-    public void onFrameH264(byte[] buffer, int length) {
+    public void onFrameH264(byte[] buffer, int length) throws IOException {
 
         /*
         * 解码以后的数据回调处

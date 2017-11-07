@@ -14,6 +14,7 @@ import com.pumpkin.org.angrypandaav.ffmpeg.FilterActivity;
 import com.pumpkin.org.angrypandaav.ffmpeg.MuxActivity;
 import com.pumpkin.org.angrypandaav.manager.camera.test.CameraGLTestActivity;
 import com.pumpkin.org.angrypandaav.manager.camera.test.CameraTestActivity;
+import com.pumpkin.org.angrypandaav.media.test.MediaActivity;
 import com.pumpkin.org.angrypandaav.mediac.acc.p1.test.t1.AudioEncoderP1Act;
 import com.pumpkin.org.angrypandaav.x264.X264TestActivity;
 
@@ -38,7 +39,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
         int id=v.getId();
         switch (id) {
             case R.id.camera_mc:
-                startActivity(new Intent(this, ExtractorExtActivity.class));
+                startActivity(new Intent(this, MediaActivity.class));
                 break;
         }
 

@@ -107,6 +107,7 @@ JNIEXPORT jint JNICALL
 Java_com_panda_org_ffmpegextwrapper_FFmpegWrapper_initRecord(
         JNIEnv *env,jobject thiz,jstring outpath){
     int ret=0;
+    LOGI("Java_com_panda_org_ffmpegextwrapper_FFmpegWrapper_initRecord entry !");
 
     av_log_set_callback(aac_log);
 
@@ -138,6 +139,8 @@ Java_com_panda_org_ffmpegextwrapper_FFmpegWrapper_initRecord(
     avformat_write_header(fmt_ctx,NULL);
     av_new_packet(&audioPkt,audioSize);
 
+    LOGI("Java_com_panda_org_ffmpegextwrapper_FFmpegWrapper_initRecord exit !");
+
     return 0;
 }
 
@@ -150,22 +153,30 @@ JNIEXPORT jint JNICALL
 Java_com_panda_org_ffmpegextwrapper_FFmpegWrapper_writeAudioData(
         JNIEnv *env,jobject thiz,jbyteArray pcmdata){
 
-    uint8_t* srcBuf=(uint8_t*)env->GetByteArrayElements(pcmdata, 0);
-    audioFrame->data[0]=srcBuf;
+    LOGI("Java_com_panda_org_ffmpegextwrapper_FFmpegWrapper_writeAudioData entry !");
+    jbyte* srcBuf=(jbyte*)env->GetByteArrayElements(pcmdata, 0);
+    LOGI("Java_com_panda_org_ffmpegextwrapper_FFmpegWrapper_writeAudioData 777 !");
+    jsize oldsize = env->GetArrayLength(pcmdata);
+    LOGI("Java_com_panda_org_ffmpegextwrapper_FFmpegWrapper_writeAudioData 888 !");
+    //memcpy(audioFrame->data[0],(unsigned char*)srcBuf,(int)oldsize);
+    audioFrame->data[0]=(unsigned char*)srcBuf;
+    LOGI("Java_com_panda_org_ffmpegextwrapper_FFmpegWrapper_writeAudioData 999 !");
     int got_frame=0;
     int ret=avcodec_encode_audio2(audioStream->codec,&audioPkt,audioFrame,&got_frame);
+    LOGI("Java_com_panda_org_ffmpegextwrapper_FFmpegWrapper_writeAudioData 1000 !");
     if(ret<0){
         LOGE("encoder failed !");
         return ret;
     }
-
+    LOGI("Java_com_panda_org_ffmpegextwrapper_FFmpegWrapper_writeAudioData 1001 !");
     if(got_frame==1){
         audioPkt.stream_index=0;
         ret=av_interleaved_write_frame(fmt_ctx,&audioPkt);
     }
-
+    LOGI("Java_com_panda_org_ffmpegextwrapper_FFmpegWrapper_writeAudioData 1002 !");
     av_free_packet(&audioPkt);
     env->ReleaseByteArrayElements(pcmdata, (jbyte*)srcBuf, 0);
+    LOGI("Java_com_panda_org_ffmpegextwrapper_FFmpegWrapper_writeAudioData exit !");
     return 0;
 }
 
