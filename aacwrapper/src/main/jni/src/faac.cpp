@@ -13,7 +13,7 @@ extern "C"
 #include "libavutil/mathematics.h"
 }
 
-using namespace aacn;
+using namespace panda;
 
 aac::aac()
 {

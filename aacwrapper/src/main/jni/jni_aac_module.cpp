@@ -1,6 +1,6 @@
 #include "jni_aac_module.h"
 #include "faac.h"
-using namespace aacn;
+using namespace panda;
 
 AVFormatContext *outputCtx;
 AVStream        *audioStream;

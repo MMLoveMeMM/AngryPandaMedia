@@ -16,7 +16,7 @@ extern "C"
 }
 
 using namespace std;
-namespace aacn
+namespace panda
 {
 class aac
 {

@@ -1,5 +1,5 @@
 LOCAL_PATH := $(call my-dir)
-
+MAIN_PATH := $(LOCAL_PATH)
 include $(CLEAR_VARS)
 LOCAL_MODULE := avcodec
 LOCAL_SRC_FILES := xprebuilt/libavcodec.so
@@ -37,12 +37,19 @@ include $(PREBUILT_SHARED_LIBRARY)
 
 include $(CLEAR_VARS)
 
+LOCAL_PATH := $(MAIN_PATH)
+
 LOCAL_SHARED_LIBRARIES:= avcodec avformat avutil swresample swscale avfilter aac
+
+LOCAL_SRC_LIST := $(wildcard $(LOCAL_PATH)/src/*.cpp)
+LOCAL_SRC_CORE := $(LOCAL_SRC_LIST:$(LOCAL_PATH)/%=%)
 
 LOCAL_SRC_FILES := jni_core_module.cpp \
                     jni_utils_module.cpp \
-                    jni_aac_module.cpp \
-                    src/faac.cpp
+                    jni_aac_module.cpp
+
+LOCAL_SRC_FILES += $(LOCAL_SRC_CORE)
+
 LOCAL_LDLIBS 	:= -llog -ljnigraphics -lz -ldl -lgcc
 LOCAL_LDLIBS += -llog -lz -landroid
 LOCAL_LDLIBS += -lGLESv2 -ljnigraphics
