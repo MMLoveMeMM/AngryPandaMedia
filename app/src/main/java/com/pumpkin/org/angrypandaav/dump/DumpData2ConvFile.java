@@ -3,7 +3,7 @@ package com.pumpkin.org.angrypandaav.dump;
 import android.os.Environment;
 
 import com.apkfuns.logutils.LogUtils;
-import com.panda.org.utilswrapper.TimeStamp;
+import com.panda.org.utilswrapper.time.TimeStamp;
 
 import java.io.File;
 import java.io.IOException;

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.panda.org.aacwrapper.test.AccActivity;
 import com.panda.org.extractorwrapper.test.ExtractorActivity;
 import com.panda.org.extractorwrapper.test.ExtractorExtActivity;
 import com.pumpkin.org.angrypandaav.ffmpeg.ConvertActivity;
@@ -39,7 +40,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
         int id=v.getId();
         switch (id) {
             case R.id.camera_mc:
-                startActivity(new Intent(this, MediaActivity.class));
+                startActivity(new Intent(this, AccActivity.class));
                 break;
         }
 

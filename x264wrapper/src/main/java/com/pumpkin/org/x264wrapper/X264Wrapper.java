@@ -2,6 +2,7 @@ package com.pumpkin.org.x264wrapper;
 
 import com.apkfuns.logutils.LogUtils;
 
+import java.io.IOException;
 import java.nio.ByteBuffer;
 
 /**
@@ -38,7 +39,7 @@ public class X264Wrapper {
         encoderH264(length, time);
     }
 
-    private void H264DataCallBackFunc(byte[] buffer, int length) {
+    private void H264DataCallBackFunc(byte[] buffer, int length) throws IOException {
         LogUtils.i("call back buffer len : " + length);
         LogUtils.i("call back buffer : " + buffer);
         if (listener != null) {

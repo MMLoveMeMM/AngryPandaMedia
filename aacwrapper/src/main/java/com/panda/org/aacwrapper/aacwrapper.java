@@ -10,11 +10,11 @@ public class aacwrapper {
         System.loadLibrary("aacwrapper");
     }
 
-    public static native int initRecord(String outputPath);
+    public native int initRecord(String outputPath);
 
-    public static native int writeAudioData(byte[] pcmData);
+    public native int writeAudioData(byte[] pcmData);
 
-    public static native void closeRecord();
+    public native int closeRecord();
 
     public native int pcm2Aac(String pcmfile, String aacfile);
 

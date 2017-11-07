@@ -7,7 +7,6 @@ import android.media.MediaMuxer;
 import android.os.Environment;
 
 import com.apkfuns.logutils.LogUtils;
-import com.panda.org.utilswrapper.TimeStamp;
 
 import java.io.File;
 import java.io.FileOutputStream;
